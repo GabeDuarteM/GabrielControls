@@ -31,9 +31,7 @@ namespace GabrielControls
             set { SetValue(MinValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MinValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MinValueProperty =
-            DependencyProperty.Register("MinValue", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(decimal.MinValue));
+        public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register("MinValue", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(decimal.MinValue));
 
         public decimal MaxValue
         {
@@ -41,7 +39,6 @@ namespace GabrielControls
             set { SetValue(MaxValueProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MaxValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(decimal.MaxValue));
 
         public int DecimalPlaces
@@ -50,18 +47,15 @@ namespace GabrielControls
             set { SetValue(DecimalPlacesProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for DecimalPlaces.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register("DecimalPlaces", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0));
+        public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register("DecimalPlaces", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0, new PropertyChangedCallback(OnValueChanged)));
 
         public decimal Value
         {
-            get { return (decimal)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); OnPropertyChanged(); }
+            get { return (decimal)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); OnPropertyChanged(); }
         }
 
-        // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Value", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(default(decimal)));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(default(decimal)));
 
         private string _sValue;
 
@@ -75,36 +69,9 @@ namespace GabrielControls
             DataContext = this;
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propertyName = "")
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion INotifyPropertyChanged Members
-
-        private void Diminuir_Click(object sender, RoutedEventArgs e)
-        {
-            if (decimal.Parse(sValue) > decimal.MinValue && decimal.Parse(sValue) - 1 >= MinValue)
-            {
-                Value--;
-                sValue = Value.ToString();
-                OnPropertyChanged("Value");
-            }
-            else
-            {
-                Value = MinValue;
-                sValue = Value.ToString();
-                OnPropertyChanged("Value");
-            }
+            (d as NumericUpDown).sValue = (d as NumericUpDown).Value.ToString();
         }
 
         private void Aumentar_Click(object sender, RoutedEventArgs e)
@@ -118,6 +85,22 @@ namespace GabrielControls
             else
             {
                 Value = MaxValue;
+                sValue = Value.ToString();
+                OnPropertyChanged("Value");
+            }
+        }
+
+        private void Diminuir_Click(object sender, RoutedEventArgs e)
+        {
+            if (decimal.Parse(sValue) > decimal.MinValue && decimal.Parse(sValue) - 1 >= MinValue)
+            {
+                Value--;
+                sValue = Value.ToString();
+                OnPropertyChanged("Value");
+            }
+            else
+            {
+                Value = MinValue;
                 sValue = Value.ToString();
                 OnPropertyChanged("Value");
             }
@@ -247,5 +230,21 @@ namespace GabrielControls
 
             textbox.Text = string.Format("{0:0" + zeros + "}", Value);
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion INotifyPropertyChanged Members
     }
 }
