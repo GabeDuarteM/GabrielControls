@@ -9,6 +9,7 @@
         Title="MainWindow" Height="350" Width="525">
     <StackPanel Margin="10">
         <gc:TextBoxPlaceholder MaxLength="4" Height="23" VerticalAlignment="Top" Placeholder="Digite o email..." />
-        <gc:NumericUpDown Value="10" MinValue="-5" MaxValue="10" DecimalPlaces="2" Margin="0,5,0,0" />
+        <!--<gc:NumericUpDown Value="{Binding Valor}" MinValue="-5" MaxValue="10" DecimalPlaces="2" Margin="0,5,0,0" />-->
+        <gc:NumericUpDown Value="10" DecimalPlaces="0" VerticalAlignment="Center" Width="67" MinValue="10" MaxValue="99999" />
     </StackPanel>
 </Window>

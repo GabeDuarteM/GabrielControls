@@ -66,7 +66,6 @@ namespace GabrielControls
         public NumericUpDown()
         {
             InitializeComponent();
-            DataContext = this;
         }
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
