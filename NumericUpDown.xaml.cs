@@ -28,7 +28,7 @@ namespace GabrielControls
         public decimal MinValue
         {
             get { return (decimal)GetValue(MinValueProperty); }
-            set { SetValue(MinValueProperty, value); }
+            set { SetValue(MinValueProperty, value); OnPropertyChanged(); }
         }
 
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register("MinValue", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(decimal.MinValue));
@@ -36,7 +36,7 @@ namespace GabrielControls
         public decimal MaxValue
         {
             get { return (decimal)GetValue(MaxValueProperty); }
-            set { SetValue(MaxValueProperty, value); }
+            set { SetValue(MaxValueProperty, value); OnPropertyChanged(); }
         }
 
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register("MaxValue", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(decimal.MaxValue));
@@ -44,10 +44,10 @@ namespace GabrielControls
         public int DecimalPlaces
         {
             get { return (int)GetValue(DecimalPlacesProperty); }
-            set { SetValue(DecimalPlacesProperty, value); }
+            set { SetValue(DecimalPlacesProperty, value); OnPropertyChanged(); }
         }
 
-        public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register("DecimalPlaces", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0, new PropertyChangedCallback(OnValueChanged)));
+        public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register("DecimalPlaces", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0));
 
         public decimal Value
         {
@@ -55,7 +55,7 @@ namespace GabrielControls
             set { SetValue(ValueProperty, value); OnPropertyChanged(); }
         }
 
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(default(decimal)));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(decimal), typeof(NumericUpDown), new PropertyMetadata(default(decimal), new PropertyChangedCallback(OnValueChanged)));
 
         private string _sValue;
 
