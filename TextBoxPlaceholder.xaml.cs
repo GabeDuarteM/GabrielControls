@@ -66,7 +66,6 @@ namespace GabrielControls
         {
             InitializeComponent();
             PlaceholderVisibility = Visibility.Visible;
-            DataContext = this;
         }
 
         private void VerificaNecessidadePlaceholder(object sender, TextChangedEventArgs e)

@@ -20,7 +20,8 @@
             <ColumnDefinition Width="23" />
             <ColumnDefinition Width="2" />
         </Grid.ColumnDefinitions>
-        <TextBox DataObject.Pasting="TextBox_Pasting" LostFocus="TextBox_LostFocus" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" Height="{Binding }" Text="{Binding sValue, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.ColumnSpan="3" Grid.RowSpan="5" />
+        <TextBox DataObject.Pasting="TextBox_Pasting" LostFocus="TextBox_LostFocus" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TextBox_TextChanged" Height="{Binding RelativeSource= {RelativeSource AncestorType={x:Type local:NumericUpDown}}}"
+                 Text="{Binding sValue, RelativeSource={RelativeSource AncestorType={x:Type local:NumericUpDown}}, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" Grid.ColumnSpan="3" Grid.RowSpan="5" />
         <Grid Grid.Row="1" Grid.Column="1">
             <Button Click="Aumentar_Click" />
             <TextBlock IsHitTestVisible="False" FontSize="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="▲" />
