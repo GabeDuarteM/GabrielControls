@@ -96,6 +96,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GabrielControls2\GabrielControls2.csproj">
+      <Project>{bc03d706-f1ab-40fc-be4b-1b5da72b64e7}</Project>
+      <Name>GabrielControls2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GabrielControls.csproj">
       <Project>{ef47373b-d07c-4215-b203-09ddaee962b1}</Project>
       <Name>GabrielControls</Name>

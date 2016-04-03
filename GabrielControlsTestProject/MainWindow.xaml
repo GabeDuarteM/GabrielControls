@@ -5,11 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GabrielControlsTestProject"
         xmlns:gc="clr-namespace:GabrielControls;assembly=GabrielControls"
+        xmlns:gc2="clr-namespace:GabrielControls2;assembly=GabrielControls2"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel Margin="10">
-        <gc:TextBoxPlaceholder Text="{Binding Text}" MaxLength="4" Height="23" VerticalAlignment="Top" />
-        <gc:TextBoxPlaceholder MaxLength="4" Height="23" VerticalAlignment="Top" Placeholder="Digite o email..." Margin="0,5,0,0" />
-        <gc:NumericUpDown Value="{Binding Valor}" MinValue="-5" MaxValue="10" DecimalPlaces="2" Margin="0,5,0,0" />
+        <!--<gc:TextBoxPlaceholder Text="{Binding Text}" MaxLength="4" Height="23" VerticalAlignment="Top" />-->
+        <!--<gc:TextBoxPlaceholder MaxLength="4" Height="23" VerticalAlignment="Top" Placeholder="Digite o email..." Margin="0,5,0,0" />-->
+        <gc2:PlaceholderTextBox Placeholder="Beterraba" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MaxLength="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,5,0,0" />
+        <!--<gc:NumericUpDown Value="{Binding Valor}" MinValue="-5" MaxValue="10" DecimalPlaces="2" Margin="0,5,0,0" />-->
+        <gc2:NumericUpDown DecimalPlaces="2" Value="{Binding Valor,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinValue="-5" MaxValue="10" Margin="0,5,0,0" />
+        <StackPanel Orientation="Horizontal">
+            <Label Content="PlaceholderTextBox: " />
+            <Label Content="{Binding Text}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="NumericUpDown: " />
+            <Label Content="{Binding Valor}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+        </StackPanel>
+        <Button  Content="Clique" Click="Button_Click" />
     </StackPanel>
 </Window>

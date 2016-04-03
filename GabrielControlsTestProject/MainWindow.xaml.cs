@@ -19,23 +19,40 @@ namespace GabrielControlsTestProject
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
+    {
+        private ViewModel vm;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            vm = new ViewModel();
+            vm.Text = "Teste";
+            vm.Valor = 350.20m;
+            vm.MaxLength = 500;
+            DataContext = vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            vm.MaxLength = 10;
+        }
+    }
+
+    public class ViewModel
     {
         private string _Text;
 
         public string Text { get { return _Text; } set { _Text = value; OnPropertyChanged(); } }
 
-        private string _Valor;
+        private decimal _Valor;
 
-        public string Valor { get { return _Valor; } set { _Valor = value; OnPropertyChanged(); } }
+        public decimal Valor { get { return _Valor; } set { _Valor = value; OnPropertyChanged(); } }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = this;
-            Text = "Teste 123 Funciona";
-            Valor = "10";
-        }
+        private int _MaxLength;
+
+        public int MaxLength { get { return _MaxLength; } set { _MaxLength = value; OnPropertyChanged(); } }
 
         #region INotifyPropertyChanged Members
 
